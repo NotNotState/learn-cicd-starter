@@ -15,7 +15,8 @@ func GetAPIKey(headers http.Header) (string, error) {
 		return "", ErrNoAuthHeaderIncluded
 	}
 	splitAuth := strings.Split(authHeader, " ")
-	if len(splitAuth) < 2 || splitAuth[0] != "ApiKey" {
+	// fix by setting < 2, and adding || splitAuth[0] != "ApiKey"
+	if len(splitAuth) < 1 {
 		return "", errors.New("malformed authorization header")
 	}
 
